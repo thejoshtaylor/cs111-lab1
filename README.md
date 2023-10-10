@@ -1,17 +1,19 @@
-## UID: 123456789
+## UID: 805919722
 
 ## Pipe Up
 
-One sentence description
+A C based replacement program for the bash pipe operator
 
 ## Building
 
-Explain briefly how to build your program
+```make```
 
 ## Running
 
-Show an example run of your program, using at least two additional arguments, and what to expect
+```shell
+./pipe ls cat wc etc.
+```
 
 ## Cleaning up
 
-Explain briefly how to clean up all binary files
+```make clean```
