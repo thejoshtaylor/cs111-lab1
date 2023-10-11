@@ -18,10 +18,9 @@ int main(int argc, char *argv[])
 		// Fork the process
 		int p = fork();
 		
+		// Child process
 		if (p == 0)
 		{
-			// Child process
-
 			// Redirect STDIN and STDOUT to our pipes
 			dup2(lastOut, STDIN_FILENO);
 			if (i != argc - 1)
@@ -31,15 +30,15 @@ int main(int argc, char *argv[])
 			execlp(argv[i], argv[i], NULL);
 
 			// If the command is not found, return an error code
-			return -1;
+			return 1;
 		}
+		// Parent process
 		else
 		{
-			// Parent process
-			
 			// Wait for the child process to end and get the status code
 			int status = 0;
 			waitpid(p, &status, 0);
+			status = WEXITSTATUS(status);
 
 			// If we have a failed response
 			if (status != 0)
@@ -59,10 +58,9 @@ int main(int argc, char *argv[])
 	close(pipefd[0]);
 	close(pipefd[1]);
 	// Only close the lastOut if it was modified
-	if (argc > 1) {
+	if (argc > 1)
 		close(lastOut);
-	} else {
+	else
 		// No parameters, successful termination
 		return 0;
-	}
 }
