@@ -25,5 +25,5 @@ make clean
 ## Testing
 
 ```shell
-python test_lab1.py
+python -m unittest
 ```
